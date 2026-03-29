@@ -4,7 +4,12 @@
       <h2 class="title">Dein Surf-Video</h2>
       <div class="wave-divider">
         <svg viewBox="0 0 200 20" preserveAspectRatio="none">
-          <path d="M0 10 Q25 0 50 10 Q75 20 100 10 Q125 0 150 10 Q175 20 200 10" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none"/>
+          <path
+            d="M0 10 Q25 0 50 10 Q75 20 100 10 Q125 0 150 10 Q175 20 200 10"
+            stroke="rgba(255,255,255,0.4)"
+            stroke-width="1.5"
+            fill="none"
+          />
         </svg>
       </div>
     </div>
@@ -27,7 +32,14 @@
 
       <div class="file-field">
         <label for="video" class="file-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <polyline points="16 16 12 12 8 16" />
             <line x1="12" y1="12" x2="12" y2="21" />
             <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
@@ -38,7 +50,14 @@
       </div>
 
       <button type="submit" @click.prevent="doUpload">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <line x1="22" y1="2" x2="11" y2="13" />
           <polygon points="22 2 15 22 11 13 2 9 22 2" />
         </svg>
@@ -133,7 +152,7 @@ export default {
 
 .subtitle {
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 1);
   margin: 0 0 4px;
   line-height: 1.5;
 }
@@ -155,8 +174,8 @@ label {
 input[type='text'] {
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
   color: white;
   font-size: 0.9rem;
   outline: none;
@@ -171,7 +190,7 @@ input[type='text']:focus {
 }
 
 input[type='text']::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 /* ── File picker ─────────────────────────────────────────── */
@@ -191,9 +210,9 @@ input[type='file'] {
   gap: 10px;
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px dashed rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.7);
+  border: 1px dashed rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
   font-size: 0.85rem;
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
