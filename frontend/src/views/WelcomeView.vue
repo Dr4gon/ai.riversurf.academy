@@ -1,53 +1,71 @@
 <template>
   <div class="container">
-    <div class="chat-view">
-      <form class="chat-window">
-        <div class="chat-text">
-          <div class="chat-message-autoscroll">
-            <div v-if="this.processing" class="chat-message-assistant">
-              <div class="dot-stretching"></div>
-            </div>
-
-            <div v-for="message in this.messages">
-              <div v-if="message.role === 'user'" class="chat-message-user">
-                <span class="chat-message chat-message-maincolor">{{ message.content }}</span>
+    <div class="chat-container">
+      <div class="chat-view">
+        <form class="chat-window">
+          <div class="chat-text">
+            <div class="chat-message-autoscroll">
+              <div v-if="this.processing" class="chat-message-assistant">
+                <div class="dot-stretching"></div>
               </div>
-              <div v-else class="chat-message-assistant">
-                <div class="chat-message chat-message-secondarycolor">
-                  <span>{{ message.content }}</span>
-                  <div class="tooltip">
-                    <img
-                      @click="this.markUnuseful(this.messages.indexOf(message))"
-                      v-if="message.useful"
-                      class="chat-message-downvote-deactivated"
-                      src="@/assets/poop.png"
-                    />
-                    <img @click="this.markUseful(this.messages.indexOf(message))" v-else src="@/assets/poop.png" />
-                    <span class="tooltiptext">Falls dir diese Antwort nicht hilft, einmal hier klicken</span>
+
+              <div v-for="message in this.messages">
+                <div v-if="message.role === 'user'" class="chat-message-user">
+                  <span class="chat-message chat-message-maincolor">{{ message.content }}</span>
+                </div>
+                <div v-else class="chat-message-assistant">
+                  <div class="chat-message chat-message-secondarycolor">
+                    <span>{{ message.content }}</span>
+                    <div class="tooltip">
+                      <img
+                        @click="this.markUnuseful(this.messages.indexOf(message))"
+                        v-if="message.useful"
+                        class="chat-message-downvote-deactivated"
+                        src="@/assets/poop.png"
+                      />
+                      <img @click="this.markUseful(this.messages.indexOf(message))" v-else src="@/assets/poop.png" />
+                      <span class="tooltiptext">Falls dir diese Antwort nicht hilft, einmal hier klicken</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="chat-message-assistant">
-              <div class="chat-message chat-message-secondarycolor">
-                <span>{{ this.initialMessage }}</span>
+              <div class="chat-message-assistant">
+                <div class="chat-message chat-message-secondarycolor">
+                  <span>{{ this.initialMessage }}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="chat-actions">
-          <input class="text" v-model="userQuestion" />
-          <button class="chat-button" type="submit" @click.prevent="doAskRiversurfAssistant">
-            <img class="chat-send-img" src="@/assets/message-in-a-bottle.png" />
-          </button>
-        </div>
-      </form>
-    </div>
+          <div class="chat-actions">
+            <input class="text" v-model="userQuestion" />
+            <button class="chat-button" type="submit" @click.prevent="doAskRiversurfAssistant">
+              <img class="chat-send-img" src="@/assets/message-in-a-bottle.png" />
+            </button>
+          </div>
+        </form>
+      </div>
 
-    <div class="arrow-container">
-      <span class="arrow arrow-left"></span>
-      <span class="arrow arrow-right"></span>
+      <nav class="bottom-nav">
+        <button class="nav-item" type="button">
+          <img src="@/assets/message-in-a-bottle.png" class="nav-icon-img" alt="Chat" />
+          <span>Chat</span>
+        </button>
+        <button class="nav-item" type="button">
+          <svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+          <span>Surfer</span>
+        </button>
+        <button class="nav-item" type="button">
+          <svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="6" width="14" height="12" rx="2" />
+            <path d="M16 10l6-3v10l-6-3V10z" />
+          </svg>
+          <span>Videos</span>
+        </button>
+      </nav>
     </div>
   </div>
 </template>
@@ -81,13 +99,22 @@ export default {
 </script>
 
 <style scoped>
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 20px;
+  width: min(85vw, 1000px);
+  height: calc(100vh - 40px);
+}
+
 .chat-view {
   background-color: rgba(128, 128, 128, 0.5);
-  margin: 20px;
   display: flex;
   justify-content: center;
-  height: 74vh;
-  width: min(85vw, 1000px);
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
   border-radius: 10px 10px 0 0;
 }
 
@@ -113,7 +140,8 @@ p {
   margin-right: 5px;
   border-radius: 10px 10px 0 0;
   width: inherit;
-  height: 99%;
+  flex: 1;
+  min-height: 0;
   overflow: auto; /* Add scrollbar, when needed */
 }
 
@@ -196,6 +224,8 @@ p {
   width: 100%;
   width: -moz-available; /* WebKit-based browsers will ignore this. */
   width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-button {
@@ -317,72 +347,82 @@ p {
   }
 }
 
-/* Down arrow from https://codepen.io/l-e-e/pen/MWogXNb */
-.arrow-container {
-  width: 100vw;
-  height: 10vh;
+.bottom-nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  height: 56px;
+  background-color: var(--water-color);
+  border-radius: 0 0 10px 10px;
+  border-top: 2px solid var(--underwater-color);
+  padding: 0 8px;
+  gap: 4px;
 }
 
-.arrow {
-  width: 7px;
-  height: 32px;
-  background: white;
-  border-radius: 5px;
-  margin: 6px;
-  animation: move 1.1s infinite ease-in-out;
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  flex: 1;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--water-font-family);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px 0;
+  border-radius: 6px;
+  transition: color 0.2s, background-color 0.2s;
 }
 
-.arrow-left {
-  transform: rotate(-45deg);
+.nav-item:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
-.arrow-right {
-  transform: rotate(45deg);
+.nav-icon-img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.75;
+  transition: opacity 0.2s;
 }
 
-@keyframes move {
-  0% {
-    margin-top: 0;
-  }
-  50% {
-    margin-top: 100px;
-  }
-  100% {
-    margin-top: 0;
-  }
+.nav-item:hover .nav-icon-img {
+  opacity: 1;
+}
+
+.nav-icon-svg {
+  width: 22px;
+  height: 22px;
 }
 
 /* ── Responsive breakpoints ─────────────────────────────────── */
 
 /* Small phones (≤ 480px) */
 @media (max-width: 480px) {
-  .chat-view {
+  .chat-container {
     margin: 8px;
     width: calc(100vw - 16px);
-    height: 78vh;
+    height: calc(100vh - 16px);
   }
 
   .chat-message {
     max-width: 90%;
   }
-
-  .arrow-container {
-    height: 6vh;
-  }
-
-  .arrow {
-    height: 22px;
-  }
 }
 
 /* Tablets (481px – 768px) */
 @media (min-width: 481px) and (max-width: 768px) {
-  .chat-view {
+  .chat-container {
     margin: 12px;
     width: calc(100vw - 24px);
+    height: calc(100vh - 24px);
   }
 
   .chat-message {
@@ -392,17 +432,13 @@ p {
 
 /* Landscape-Modus auf mobilen Geräten */
 @media (max-height: 500px) and (orientation: landscape) {
-  .chat-view {
-    height: 82vh;
+  .chat-container {
     margin: 5px;
+    height: calc(100vh - 10px);
   }
 
-  .arrow-container {
-    height: 4vh;
-  }
-
-  .arrow {
-    height: 16px;
+  .bottom-nav {
+    height: 48px;
   }
 }
 </style>
