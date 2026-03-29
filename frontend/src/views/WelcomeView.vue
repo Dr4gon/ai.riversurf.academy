@@ -87,7 +87,7 @@ export default {
   display: flex;
   justify-content: center;
   height: 74vh;
-  width: 85vw;
+  width: min(85vw, 1000px);
   border-radius: 10px 10px 0 0;
 }
 
@@ -203,10 +203,15 @@ p {
   border: none;
   background-color: #ffffff;
   padding: 0; /* Safari fix to restore full size of image within */
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chat-send-img {
-  width: 20px;
+  width: 24px;
   display: flex;
 }
 
@@ -347,6 +352,57 @@ p {
   }
   100% {
     margin-top: 0;
+  }
+}
+
+/* ── Responsive breakpoints ─────────────────────────────────── */
+
+/* Small phones (≤ 480px) */
+@media (max-width: 480px) {
+  .chat-view {
+    margin: 8px;
+    width: calc(100vw - 16px);
+    height: 78vh;
+  }
+
+  .chat-message {
+    max-width: 90%;
+  }
+
+  .arrow-container {
+    height: 6vh;
+  }
+
+  .arrow {
+    height: 22px;
+  }
+}
+
+/* Tablets (481px – 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .chat-view {
+    margin: 12px;
+    width: calc(100vw - 24px);
+  }
+
+  .chat-message {
+    max-width: 85%;
+  }
+}
+
+/* Landscape-Modus auf mobilen Geräten */
+@media (max-height: 500px) and (orientation: landscape) {
+  .chat-view {
+    height: 82vh;
+    margin: 5px;
+  }
+
+  .arrow-container {
+    height: 4vh;
+  }
+
+  .arrow {
+    height: 16px;
   }
 }
 </style>
