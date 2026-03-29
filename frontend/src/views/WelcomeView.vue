@@ -179,6 +179,8 @@ export default {
   flex: 1;
   min-height: 0;
   border-radius: 10px 10px 0 0;
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: -2px;
 }
 
 input {
@@ -453,7 +455,9 @@ p {
 
 .nav-item--active {
   color: #ffffff;
-  border-bottom: 2px solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.25);
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: -2px;
 }
 
 .nav-icon-img {
