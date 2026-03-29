@@ -122,7 +122,7 @@ input {
   width: inherit;
   border-radius: 0 0 0 5px;
   border: none;
-  outline-width: 0;
+  outline: none;
 }
 
 p {
