@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div class="cards" ref="slider">
+    <div class="cards">
       <div class="card">
         <div class="card-bubble">
           <div class="quote-mark">"</div>
@@ -62,82 +62,12 @@
       </div>
     </div>
 
-    <div class="dots">
-      <span
-        v-for="(_, i) in 3"
-        :key="i"
-        class="dot"
-        :class="{ 'dot--active': activeIndex === i }"
-        @click="scrollTo(i)"
-      ></span>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'SurferView',
-  data() {
-    return { activeIndex: 0 };
-  },
-  mounted() {
-    const slider = this.$refs.slider;
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-    var velX = 0;
-    var momentumID;
-
-    slider.addEventListener('scroll', () => {
-      const index = Math.round(slider.scrollLeft / slider.offsetWidth);
-      this.activeIndex = index;
-    });
-
-    slider.addEventListener('mousedown', e => {
-      isDown = true;
-      slider.classList.add('active');
-      startX = e.pageX - slider.offsetLeft;
-      scrollLeft = slider.scrollLeft;
-      cancelMomentumTracking();
-    });
-    slider.addEventListener('mouseleave', () => {
-      isDown = false;
-      slider.classList.remove('active');
-    });
-    slider.addEventListener('mouseup', () => {
-      isDown = false;
-      slider.classList.remove('active');
-      beginMomentumTracking();
-    });
-    slider.addEventListener('mousemove', e => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 3;
-      var prevScrollLeft = slider.scrollLeft;
-      slider.scrollLeft = scrollLeft - walk;
-      velX = slider.scrollLeft - prevScrollLeft;
-    });
-    slider.addEventListener('wheel', () => cancelMomentumTracking());
-
-    function beginMomentumTracking() {
-      cancelMomentumTracking();
-      momentumID = requestAnimationFrame(momentumLoop);
-    }
-    function cancelMomentumTracking() {
-      cancelAnimationFrame(momentumID);
-    }
-    function momentumLoop() {
-      slider.scrollLeft += velX;
-      velX *= 0.95;
-      if (Math.abs(velX) > 0.5) momentumID = requestAnimationFrame(momentumLoop);
-    }
-  },
-  methods: {
-    scrollTo(i) {
-      this.$refs.slider.scrollTo({ left: i * this.$refs.slider.offsetWidth, behavior: 'smooth' });
-    },
-  },
 };
 </script>
 
@@ -180,29 +110,17 @@ export default {
 /* ── Cards slider ────────────────────────────────────────── */
 .cards {
   display: flex;
-  flex: 1;
-  min-height: 0;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  cursor: grab;
-  padding: 8px 16px 12px;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 16px 16px;
   gap: 16px;
 }
 
-.cards::-webkit-scrollbar { display: none; }
-.cards.active { cursor: grabbing; }
-
 /* ── Single card ─────────────────────────────────────────── */
 .card {
-  flex-shrink: 0;
-  width: calc(100% - 32px);
-  scroll-snap-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 16px;
 }
 
@@ -289,27 +207,4 @@ export default {
   filter: invert(1) brightness(0.8);
 }
 
-/* ── Dot indicators ──────────────────────────────────────── */
-.dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px 0 12px;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.dot--active {
-  background: var(--underwater-color);
-  border-color: var(--underwater-color);
-  transform: scale(1.3);
-}
 </style>
