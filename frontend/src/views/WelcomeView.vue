@@ -45,7 +45,7 @@
           </div>
         </form>
 
-        <div v-show="currentView === 'surfer'" class="placeholder-view"></div>
+        <SurferView v-show="currentView === 'surfer'" />
         <VideoView v-show="currentView === 'videos'" />
       </div>
 
@@ -133,10 +133,11 @@
 import { messageStore } from '../stores/message-store';
 import { mapState, mapActions } from 'pinia';
 import VideoView from './VideoView.vue';
+import SurferView from './SurferView.vue';
 
 export default {
   name: 'WelcomeView',
-  components: { VideoView },
+  components: { VideoView, SurferView },
   data() {
     return {
       userQuestion: '',
