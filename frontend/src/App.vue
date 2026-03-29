@@ -4,22 +4,15 @@
       <WelcomeView />
     </div>
   </div>
-  <div class="containedBubbles">
-    <!-- Changes of the bubble number only works in concert with changing the css bubble number as well -->
-    <div class="bubble" v-for="n in 50"></div>
-    <ContactView />
-  </div>
 </template>
 
 <script>
 import WelcomeView from '@/views/WelcomeView.vue';
-import ContactView from '@/views/ContactView.vue';
 
 export default {
   name: 'App',
   components: {
     WelcomeView,
-    ContactView,
   },
   created() {
     this.checkAndSetUUID();
@@ -85,53 +78,5 @@ export default {
 .stay {
   position: relative;
   z-index: 1;
-}
-
-.containedBubbles {
-  /* Needed for the water bubbles to stay underwater */
-  position: relative;
-  overflow: hidden;
-}
-
-/* Bubbles under water */
-.bubble {
-  display: block;
-  border-radius: 100%;
-  opacity: 0.8;
-  position: absolute;
-}
-
-/* Changes of the bubble number only works in concert with changing the html generated bubble number as well*/
-$numberOfBubbles: 50;
-
-@function calcRandomValueBetween($min, $max, $unit) {
-  @return floor(random() * ($max - $min + 1) + $min) + $unit;
-}
-
-@for $i from 1 through $numberOfBubbles {
-  /* Some variance in bubble styling */
-  $bgpos: if($i % 2 == 0, top right, center);
-  $bubbleLength: calcRandomValueBetween(5, 100, px);
-
-  .bubble:nth-child(#{$i}) {
-    background: radial-gradient(ellipse at $bgpos, #b8c6c6 0%, var(--underwater-color) 30%, var(--water-color) 100%);
-    width: $bubbleLength; /* Must be equal to get round bubbles */
-    height: $bubbleLength; /* Must be equal to get round bubbles */
-    left: calcRandomValueBetween(1, 100, vw);
-    bottom: calcRandomValueBetween(1, 100, vh);
-    animation: move + #{$i} infinite calcRandomValueBetween(3, 15, s);
-  }
-
-  @keyframes move#{$i} {
-    0% {
-      bottom: -100px;
-    }
-    100% {
-      /* burst bubbles at different heights */
-      bottom: calcRandomValueBetween(0, 100, vh);
-      transform: translate(calcRandomValueBetween(-100, 200, px), 0);
-      opacity: 0;
-    }
-  }
 }
 </style>
