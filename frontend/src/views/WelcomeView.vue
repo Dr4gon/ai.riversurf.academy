@@ -354,7 +354,6 @@ p {
   height: 56px;
   background-color: var(--water-color);
   border-radius: 0 0 10px 10px;
-  border-top: 2px solid var(--underwater-color);
   padding: 0 8px;
   gap: 4px;
 }
