@@ -15,7 +15,9 @@
     </div>
 
     <form class="upload-card" enctype="multipart/form-data">
-      <p class="subtitle">Lade dein Video hoch und erhalte persönliches Feedback von deinem Coach.</p>
+      <p class="subtitle">
+        Lade dein Video hoch und erhalte persönliches Feedback von deinem - menschlichen - Surf-Coach.
+      </p>
 
       <div class="field">
         <label>Dein Name</label>
