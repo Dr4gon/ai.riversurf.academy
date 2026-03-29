@@ -179,8 +179,8 @@ export default {
   flex: 1;
   min-height: 0;
   border-radius: 10px 10px 0 0;
-  outline: 2px solid rgba(255, 255, 255, 0.5);
-  outline-offset: -2px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-bottom: none;
 }
 
 input {
@@ -424,6 +424,8 @@ p {
   height: 56px;
   background-color: var(--water-color);
   border-radius: 0 0 10px 10px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-top: none;
   padding: 0 8px;
   gap: 4px;
 }
@@ -455,9 +457,12 @@ p {
 
 .nav-item--active {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.25);
-  outline: 2px solid rgba(255, 255, 255, 0.8);
-  outline-offset: -2px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 6px 6px 0 0;
+  box-shadow:
+    0 -3px 0 0 #ffffff,
+    -1px 0 0 0 rgba(255, 255, 255, 0.5),
+    1px 0 0 0 rgba(255, 255, 255, 0.5);
 }
 
 .nav-icon-img {
