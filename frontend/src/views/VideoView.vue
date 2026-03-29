@@ -1,5 +1,5 @@
 <template>
-  <div class="video-view about-background">
+  <div class="video-view">
     <form class="video-upload" enctype="multipart/form-data">
       <h3>Lade dein Surf-Video für persönliches Feedback hoch</h3>
       <input type="text" placeholder="Wie heißt du?" v-model="name" />
@@ -44,20 +44,40 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  color: white;
+  margin: 10px 0 8px;
+}
+
 input {
   margin: 5px;
   padding: 5px;
   border-radius: 5px;
-  border: 1px solid var(--water-color);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 button {
   margin: 5px;
-  padding: 5px;
+  padding: 8px 16px;
   border-radius: 5px;
-  border: 1px solid var(--water-color);
-  background-color: var(--water-color);
-  color: black;
+  border: none;
+  background-color: var(--underwater-color);
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.85;
 }
 
 .video-upload {
@@ -77,27 +97,4 @@ button {
   flex-direction: column;
 }
 
-.about-background {
-  background: linear-gradient(
-    0deg,
-    var(--underwater-color) 20%,
-    var(--underwater-color) 30%,
-    var(--water-color) 70%,
-    var(--water-color) 80%
-  );
-  background-size: 100% 150%;
-  animation: underwater 4s ease infinite;
-}
-
-@keyframes underwater {
-  0% {
-    background-position: 0 20%;
-  }
-  50% {
-    background-position: 0 80%;
-  }
-  100% {
-    background-position: 0 20%;
-  }
-}
 </style>
