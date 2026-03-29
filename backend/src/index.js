@@ -5,7 +5,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 
-const contactRouter = require('./routes/contact');
 const OpenAIService = require('./routes/open-ai-service');
 const ConversationService = require('./routes/conversation-service');
 const UploadService = require('./routes/upload-service');
@@ -46,7 +45,6 @@ const start = async () => {
 
 start();
 
-app.use('/contact', contactRouter);
 app.use('/api/openai', OpenAIService);
 app.use('/admin/conversation', ConversationService);
 app.use('/upload/video', UploadService);
