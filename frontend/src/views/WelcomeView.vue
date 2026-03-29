@@ -420,14 +420,13 @@ p {
 .bottom-nav {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: stretch;
   height: 56px;
   background-color: var(--water-color);
   border-radius: 0 0 10px 10px;
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-top: none;
-  padding: 0 8px;
-  gap: 4px;
+  gap: 0;
 }
 
 .nav-item {
@@ -446,8 +445,16 @@ p {
   text-transform: uppercase;
   cursor: pointer;
   padding: 8px 0;
-  border-radius: 6px;
+  border-radius: 0;
   transition: color 0.2s, background-color 0.2s;
+}
+
+.nav-item:first-child {
+  border-radius: 0 0 0 8px;
+}
+
+.nav-item:last-child {
+  border-radius: 0 0 8px 0;
 }
 
 .nav-item:hover {
@@ -458,11 +465,16 @@ p {
 .nav-item--active {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 6px 6px 0 0;
-  box-shadow:
-    0 -3px 0 0 #ffffff,
-    -1px 0 0 0 rgba(255, 255, 255, 0.5),
-    1px 0 0 0 rgba(255, 255, 255, 0.5);
+  border-radius: 0;
+  box-shadow: 0 -3px 0 0 rgba(255, 255, 255, 0.9);
+}
+
+.nav-item:first-child.nav-item--active {
+  border-radius: 0 0 0 8px;
+}
+
+.nav-item:last-child.nav-item--active {
+  border-radius: 0 0 8px 0;
 }
 
 .nav-icon-img {
