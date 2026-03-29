@@ -1,42 +1,75 @@
 <template>
   <div class="surfer-view">
-    <div class="testimonials-section">
-      <h3>Empfohlen durch Empfehlungen</h3>
-      <div class="items" ref="slider">
-        <div class="item">
-          <div class="content">
-            <div class="testimonials">
-              <img class="testimonial-img" src="@/assets/surfer-girl.png" />
-              <p>Vroni: "De Long ist mega gut die Kleinigkeiten zu entdecken und mich dadurch weiterzubringen."</p>
-            </div>
-            <audio controls src="src/assets/possibilities.mp3"></audio>
-          </div>
+    <div class="header">
+      <h2 class="title">Stimmen aus dem Wasser</h2>
+      <div class="wave-divider">
+        <svg viewBox="0 0 200 20" preserveAspectRatio="none">
+          <path d="M0 10 Q25 0 50 10 Q75 20 100 10 Q125 0 150 10 Q175 20 200 10" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="cards" ref="slider">
+      <div class="card">
+        <div class="card-bubble">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">De Long ist mega gut die Kleinigkeiten zu entdecken und mich dadurch weiterzubringen.</p>
         </div>
-        <div class="item">
-          <div class="content">
-            <div class="testimonials">
-              <img class="testimonial-img" src="@/assets/surfer-boy.png" />
-              <p>
-                Basti: "Surfen macht super viel Spaß. De Long ermutigt mich dabei dran zu bleiben und die Frustmomente
-                gut zu überwinden."
-              </p>
-            </div>
-            <audio controls src="src/assets/possibilities.mp3"></audio>
+        <div class="card-footer">
+          <div class="avatar-wrap">
+            <img src="@/assets/surfer-girl.png" class="avatar" alt="Vroni" />
+            <div class="ripple"></div>
           </div>
-        </div>
-        <div class="item">
-          <div class="content">
-            <div class="testimonials">
-              <img class="testimonial-img" src="@/assets/surfer-girl.png" />
-              <p>
-                Vicky: "Der Coach verrät mir immer wieder Tipps und Tricks, damit mir das Surfen Spaß macht. Dafür
-                gibt's ne Kaffee oben druff."
-              </p>
-            </div>
-            <audio controls src="src/assets/possibilities.mp3"></audio>
+          <div class="card-meta">
+            <span class="name">Vroni</span>
+            <audio controls src="src/assets/possibilities.mp3" class="audio"></audio>
           </div>
         </div>
       </div>
+
+      <div class="card">
+        <div class="card-bubble">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">Surfen macht super viel Spaß. De Long ermutigt mich dabei dran zu bleiben und die Frustmomente gut zu überwinden.</p>
+        </div>
+        <div class="card-footer">
+          <div class="avatar-wrap">
+            <img src="@/assets/surfer-boy.png" class="avatar" alt="Basti" />
+            <div class="ripple"></div>
+          </div>
+          <div class="card-meta">
+            <span class="name">Basti</span>
+            <audio controls src="src/assets/possibilities.mp3" class="audio"></audio>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-bubble">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">Der Coach verrät mir immer wieder Tipps und Tricks, damit mir das Surfen Spaß macht. Dafür gibt's ne Kaffee oben druff.</p>
+        </div>
+        <div class="card-footer">
+          <div class="avatar-wrap">
+            <img src="@/assets/surfer-girl.png" class="avatar" alt="Vicky" />
+            <div class="ripple"></div>
+          </div>
+          <div class="card-meta">
+            <span class="name">Vicky</span>
+            <audio controls src="src/assets/possibilities.mp3" class="audio"></audio>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dots">
+      <span
+        v-for="(_, i) in 3"
+        :key="i"
+        class="dot"
+        :class="{ 'dot--active': activeIndex === i }"
+        @click="scrollTo(i)"
+      ></span>
     </div>
   </div>
 </template>
@@ -44,6 +77,9 @@
 <script>
 export default {
   name: 'SurferView',
+  data() {
+    return { activeIndex: 0 };
+  },
   mounted() {
     const slider = this.$refs.slider;
     let isDown = false;
@@ -52,6 +88,11 @@ export default {
     var velX = 0;
     var momentumID;
 
+    slider.addEventListener('scroll', () => {
+      const index = Math.round(slider.scrollLeft / slider.offsetWidth);
+      this.activeIndex = index;
+    });
+
     slider.addEventListener('mousedown', e => {
       isDown = true;
       slider.classList.add('active');
@@ -59,18 +100,15 @@ export default {
       scrollLeft = slider.scrollLeft;
       cancelMomentumTracking();
     });
-
     slider.addEventListener('mouseleave', () => {
       isDown = false;
       slider.classList.remove('active');
     });
-
     slider.addEventListener('mouseup', () => {
       isDown = false;
       slider.classList.remove('active');
       beginMomentumTracking();
     });
-
     slider.addEventListener('mousemove', e => {
       if (!isDown) return;
       e.preventDefault();
@@ -80,10 +118,7 @@ export default {
       slider.scrollLeft = scrollLeft - walk;
       velX = slider.scrollLeft - prevScrollLeft;
     });
-
-    slider.addEventListener('wheel', () => {
-      cancelMomentumTracking();
-    });
+    slider.addEventListener('wheel', () => cancelMomentumTracking());
 
     function beginMomentumTracking() {
       cancelMomentumTracking();
@@ -95,10 +130,13 @@ export default {
     function momentumLoop() {
       slider.scrollLeft += velX;
       velX *= 0.95;
-      if (Math.abs(velX) > 0.5) {
-        momentumID = requestAnimationFrame(momentumLoop);
-      }
+      if (Math.abs(velX) > 0.5) momentumID = requestAnimationFrame(momentumLoop);
     }
+  },
+  methods: {
+    scrollTo(i) {
+      this.$refs.slider.scrollTo({ left: i * this.$refs.slider.offsetWidth, behavior: 'smooth' });
+    },
   },
 };
 </script>
@@ -107,64 +145,171 @@ export default {
 .surfer-view {
   width: 100%;
   height: 100%;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
-}
-
-.testimonials-section {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
+  overflow: hidden;
   color: white;
 }
 
-.testimonials {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  margin-bottom: 5px;
+/* ── Header ─────────────────────────────────────────────── */
+.header {
+  padding: 16px 20px 8px;
+  text-align: center;
 }
 
-.testimonial-img {
-  width: 30vw;
+.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 8px;
 }
 
-.items {
+.wave-divider {
+  width: 100%;
+  height: 16px;
+  opacity: 0.6;
+}
+
+.wave-divider svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Cards slider ────────────────────────────────────────── */
+.cards {
   display: flex;
-  gap: 8px;
+  flex: 1;
+  min-height: 0;
+  overflow-x: scroll;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  transition: all 0.2s;
-  transform: scale(0.98);
-  will-change: transform;
-  user-select: none;
-  cursor: pointer;
+  cursor: grab;
+  padding: 8px 16px 12px;
+  gap: 16px;
 }
 
-.items::-webkit-scrollbar {
-  display: none;
-}
+.cards::-webkit-scrollbar { display: none; }
+.cards.active { cursor: grabbing; }
 
-.items.active {
-  background: var(--water-color);
-  cursor: grabbing;
-  cursor: -webkit-grabbing;
-  transform: scale(1);
-}
-
-.item {
+/* ── Single card ─────────────────────────────────────────── */
+.card {
   flex-shrink: 0;
-  width: 100%;
+  width: calc(100% - 32px);
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
 }
 
-.content {
+.card-bubble {
+  position: relative;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 16px 16px 16px 4px;
+  padding: 18px 18px 14px;
+  backdrop-filter: blur(4px);
+}
+
+.quote-mark {
+  position: absolute;
+  top: -10px;
+  left: 14px;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--underwater-color);
+  font-family: Georgia, serif;
+}
+
+.quote-text {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* ── Card footer: avatar + name + audio ──────────────────── */
+.card-footer {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 14px;
+  padding-left: 4px;
+}
+
+.avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--underwater-color);
+  display: block;
+}
+
+.ripple {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(64, 195, 180, 0.45);
+  animation: ripple 2.5s ease-out infinite;
+}
+
+@keyframes ripple {
+  0%   { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+.card-meta {
+  display: flex;
   flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--underwater-color);
+  text-transform: uppercase;
+}
+
+.audio {
+  width: 100%;
+  height: 28px;
+  filter: invert(1) brightness(0.8);
+}
+
+/* ── Dot indicators ──────────────────────────────────────── */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0 12px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.dot--active {
+  background: var(--underwater-color);
+  border-color: var(--underwater-color);
+  transform: scale(1.3);
 }
 </style>
