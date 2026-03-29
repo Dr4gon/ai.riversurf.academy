@@ -127,11 +127,10 @@ export default {
 
 .card-bubble {
   position: relative;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: var(--underwater-color);
+  border: none;
   border-radius: 16px 16px 16px 4px;
   padding: 18px 18px 14px;
-  backdrop-filter: blur(4px);
 }
 
 .quote-mark {
@@ -140,7 +139,7 @@ export default {
   left: 14px;
   font-size: 3rem;
   line-height: 1;
-  color: var(--underwater-color);
+  color: rgba(255, 255, 255, 0.5);
   font-family: Georgia, serif;
 }
 
@@ -198,7 +197,7 @@ export default {
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.06em;
-  color: var(--underwater-color);
+  color: white;
   text-transform: uppercase;
 }
 

@@ -74,7 +74,7 @@ export default {
       form.append('goal', this.goal);
       form.append('email', this.email);
       form.append('video', video);
-      const response = await axios.post(import.meta.env.VITE_BACKEND_URL + '/upload/video', form, {
+      await axios.post(import.meta.env.VITE_BACKEND_URL + '/upload/video', form, {
         headers: form.getHeaders ? form.getHeaders() : { 'Content-Type': 'multipart/form-data' },
       });
     },
@@ -123,10 +123,9 @@ export default {
 .upload-card {
   margin: 0 16px 16px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--water-color);
+  border: none;
   border-radius: 16px;
-  backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
   gap: 12px;
