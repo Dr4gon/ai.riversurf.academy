@@ -68,7 +68,7 @@ router.post('/', async (req, res) => {
         },
       ],
       model: process.env.AI_MODEL,
-      max_tokens: parseInt(process.env.MAX_TOKEN, 10),
+      max_completion_tokens: parseInt(process.env.MAX_TOKEN, 10),
     });
 
     const generatedText = response.choices[0].message.content;
