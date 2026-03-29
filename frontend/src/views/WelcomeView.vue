@@ -3,6 +3,14 @@
     <div class="chat-container">
       <div class="chat-view">
         <form v-show="currentView === 'chat'" class="chat-window">
+          <div class="chat-header">
+            <h2 class="chat-title">Dein Surf-Coach</h2>
+            <div class="wave-divider">
+              <svg viewBox="0 0 200 20" preserveAspectRatio="none">
+                <path d="M0 10 Q25 0 50 10 Q75 20 100 10 Q125 0 150 10 Q175 20 200 10" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+          </div>
           <div class="chat-text">
             <div class="chat-message-autoscroll">
               <div v-if="this.processing" class="chat-message-assistant">
@@ -529,6 +537,33 @@ p {
 
 .gh-icon {
   fill: #000000;
+}
+
+/* ── Chat header ─────────────────────────────────────────────── */
+.chat-header {
+  padding: 16px 20px 8px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.chat-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 8px;
+}
+
+.wave-divider {
+  width: 100%;
+  height: 16px;
+  opacity: 0.6;
+}
+
+.wave-divider svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* ── Responsive breakpoints ─────────────────────────────────── */
