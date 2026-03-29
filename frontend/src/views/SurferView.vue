@@ -114,6 +114,7 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   padding: 8px 16px 16px;
+  scrollbar-gutter: stable;
   gap: 16px;
 }
 
