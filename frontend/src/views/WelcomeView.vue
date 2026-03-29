@@ -2,7 +2,7 @@
   <div class="container">
     <div class="chat-container">
       <div class="chat-view">
-        <form class="chat-window">
+        <form v-show="currentView === 'chat'" class="chat-window">
           <div class="chat-text">
             <div class="chat-message-autoscroll">
               <div v-if="this.processing" class="chat-message-assistant">
@@ -44,14 +44,17 @@
             </button>
           </div>
         </form>
+
+        <div v-show="currentView === 'surfer'" class="placeholder-view"></div>
+        <div v-show="currentView === 'videos'" class="placeholder-view"></div>
       </div>
 
       <nav class="bottom-nav">
-        <button class="nav-item" type="button">
+        <button class="nav-item" :class="{ 'nav-item--active': currentView === 'chat' }" type="button" @click="currentView = 'chat'">
           <img src="@/assets/message-in-a-bottle.png" class="nav-icon-img" alt="Chat" />
           <span>Chat</span>
         </button>
-        <button class="nav-item" type="button">
+        <button class="nav-item" :class="{ 'nav-item--active': currentView === 'surfer' }" type="button" @click="currentView = 'surfer'">
           <svg
             class="nav-icon-svg"
             viewBox="0 0 24 24"
@@ -66,7 +69,7 @@
           </svg>
           <span>Surfer</span>
         </button>
-        <button class="nav-item" type="button">
+        <button class="nav-item" :class="{ 'nav-item--active': currentView === 'videos' }" type="button" @click="currentView = 'videos'">
           <svg
             class="nav-icon-svg"
             viewBox="0 0 24 24"
@@ -136,6 +139,7 @@ export default {
     return {
       userQuestion: '',
       initialMessage: import.meta.env.VITE_WELCOME_MSG,
+      currentView: 'chat',
     };
   },
   mounted() {
@@ -282,6 +286,11 @@ p {
   width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   display: flex;
   flex-direction: column;
+}
+
+.placeholder-view {
+  width: 100%;
+  height: 100%;
 }
 
 .chat-button {
@@ -437,6 +446,11 @@ p {
 .nav-item:hover {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.12);
+}
+
+.nav-item--active {
+  color: #ffffff;
+  border-bottom: 2px solid #ffffff;
 }
 
 .nav-icon-img {
