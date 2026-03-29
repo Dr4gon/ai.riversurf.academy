@@ -41,7 +41,7 @@
     "install": "^0.13.0",
     "jest": "^29.6.4",
     "jsdom": "^22.1.0",
-    "npm": "^11.8.0",
+    "npm": "^11.12.1",
     "prettier": "^2.7.1",
     "sass": "^1.65.1",
     "speed-measure-vite-plugin": "^1.0.1",
