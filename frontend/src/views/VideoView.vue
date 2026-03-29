@@ -1,8 +1,7 @@
 <template>
-  <div class="container about-background">
-    <div class="view">
-      <div class="video-upload">
-        <h3>Empfohlen durch Empfehlungen</h3>
+  <div class="video-view about-background">
+    <div class="video-upload">
+      <h3>Empfohlen durch Empfehlungen</h3>
         <div class="items">
           <div class="item">
             <div class="content">
@@ -38,16 +37,15 @@
             </div>
           </div>
         </div>
-      </div>
-      <form class="video-upload" enctype="multipart/form-data">
-        <h3>Lade dein Surf-Video für persönliches Feedback hoch</h3>
-        <input type="text" placeholder="Wie heißt du?" v-model="name" />
-        <input type="text" placeholder="Was willst du lernen?" v-model="goal" />
-        <input type="text" placeholder="Wie ist deine Mailadresse?" v-model="email" />
-        <input id="video" type="file" accept="video/*" />
-        <button type="submit" @click.prevent="doUpload">Upload</button>
-      </form>
     </div>
+    <form class="video-upload" enctype="multipart/form-data">
+      <h3>Lade dein Surf-Video für persönliches Feedback hoch</h3>
+      <input type="text" placeholder="Wie heißt du?" v-model="name" />
+      <input type="text" placeholder="Was willst du lernen?" v-model="goal" />
+      <input type="text" placeholder="Wie ist deine Mailadresse?" v-model="email" />
+      <input id="video" type="file" accept="video/*" />
+      <button type="submit" @click.prevent="doUpload">Upload</button>
+    </form>
   </div>
 </template>
 
@@ -219,6 +217,14 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+
+.video-view {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
   flex-direction: column;
 }
 
