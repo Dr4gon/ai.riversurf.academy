@@ -196,7 +196,7 @@ export default {
   justify-content: space-between;
   margin: 20px;
   width: min(85vw, 1000px);
-  height: calc(100vh - 40px);
+  height: calc(100dvh - 40px);
 }
 
 .chat-view {
@@ -593,7 +593,7 @@ p {
   .chat-container {
     margin: 8px;
     width: calc(100vw - 16px);
-    height: calc(100vh - 16px);
+    height: calc(100dvh - 16px);
   }
 
   .chat-message {
@@ -606,7 +606,7 @@ p {
   .chat-container {
     margin: 12px;
     width: calc(100vw - 24px);
-    height: calc(100vh - 24px);
+    height: calc(100dvh - 24px);
   }
 
   .chat-message {
@@ -618,7 +618,7 @@ p {
 @media (max-height: 500px) and (orientation: landscape) {
   .chat-container {
     margin: 5px;
-    height: calc(100vh - 10px);
+    height: calc(100dvh - 10px);
   }
 
   .bottom-nav {
