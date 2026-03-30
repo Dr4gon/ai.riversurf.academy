@@ -215,7 +215,7 @@ p {
   width: inherit;
   flex: 1;
   min-height: 0;
-  overflow: auto; /* Add scrollbar, when needed */
+  overflow: hidden;
 }
 
 .chat-message {
@@ -229,8 +229,8 @@ p {
 }
 
 .chat-message-autoscroll {
-  overflow: auto;
-  max-height: 100%;
+  overflow-y: auto;
+  height: 100%;
   display: flex;
   flex-direction: column-reverse;
 }
