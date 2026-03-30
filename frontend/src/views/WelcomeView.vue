@@ -7,7 +7,12 @@
             <h2 class="chat-title">Dein Surf-Coach</h2>
             <div class="wave-divider">
               <svg viewBox="0 0 200 20" preserveAspectRatio="none">
-                <path d="M0 10 Q25 0 50 10 Q75 20 100 10 Q125 0 150 10 Q175 20 200 10" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none"/>
+                <path
+                  d="M0 10 Q25 0 50 10 Q75 20 100 10 Q125 0 150 10 Q175 20 200 10"
+                  stroke="rgba(255,255,255,0.4)"
+                  stroke-width="1.5"
+                  fill="none"
+                />
               </svg>
             </div>
           </div>
@@ -58,11 +63,21 @@
       </div>
 
       <nav class="bottom-nav">
-        <button class="nav-item" :class="{ 'nav-item--active': currentView === 'chat' }" type="button" @click="currentView = 'chat'">
+        <button
+          class="nav-item"
+          :class="{ 'nav-item--active': currentView === 'chat' }"
+          type="button"
+          @click="currentView = 'chat'"
+        >
           <img src="@/assets/message-in-a-bottle.png" class="nav-icon-img" alt="Chat" />
           <span>Chat</span>
         </button>
-        <button class="nav-item" :class="{ 'nav-item--active': currentView === 'surfer' }" type="button" @click="currentView = 'surfer'">
+        <button
+          class="nav-item"
+          :class="{ 'nav-item--active': currentView === 'surfer' }"
+          type="button"
+          @click="currentView = 'surfer'"
+        >
           <svg
             class="nav-icon-svg"
             viewBox="0 0 24 24"
@@ -77,7 +92,12 @@
           </svg>
           <span>Surfer</span>
         </button>
-        <button class="nav-item" :class="{ 'nav-item--active': currentView === 'videos' }" type="button" @click="currentView = 'videos'">
+        <button
+          class="nav-item"
+          :class="{ 'nav-item--active': currentView === 'videos' }"
+          type="button"
+          @click="currentView = 'videos'"
+        >
           <svg
             class="nav-icon-svg"
             viewBox="0 0 24 24"
@@ -230,7 +250,7 @@ p {
 
 .chat-message-autoscroll {
   overflow-y: auto;
-  height: 100%;
+  height: 98%;
   display: flex;
   flex-direction: column-reverse;
 }
