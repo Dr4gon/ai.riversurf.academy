@@ -20,7 +20,7 @@
     "openai": "^4.24.1",
     "pinia": "^2.1.4",
     "v-calendar": "^3.0.3",
-    "vue": "^3.3.4",
+    "vue": "^3.5.43",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
@@ -36,7 +36,7 @@
     "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-vue": "^9.15.1",
+    "eslint-plugin-vue": "^10.11.1",
     "http-server": "^14.1.1",
     "install": "^0.13.0",
     "jest": "^29.6.4",
